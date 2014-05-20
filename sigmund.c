@@ -16,9 +16,12 @@ int opt(char *c)
 
 void printhelp()
 {
+    puts("Usage:");
+    puts("sigmund [-options] <FILE>\n");
+    puts("Options:");
     puts("-cx -> C++");
     puts("-cs -> C#");
-    puts("-j -> Java");
+    puts("-j -> Java\n");
 }
 
 int main(int argc, char *argv[])

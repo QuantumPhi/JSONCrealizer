@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     int csflag = 0;
     int jflag = 0;
 
-    char *c = argc == 2 ? argv[1] : " ";
+    char *c = argc == 3 ? argv[1] : " ";
     switch(type(c))
     {
         case 0:
@@ -42,5 +42,24 @@ int main(int argc, char *argv[])
         default:
             printhelp();
             break;
+    }
+
+    FILE *fp;
+    char *line;
+    char *name;
+    char[] *param = malloc();
+    if(strcmp(c," ") != 0)
+    {
+        fp = fopen(c,"r");
+        while(scanf(fp, "%s", line) != EOF)
+        {
+            char *tok = strtok(line," ");
+            while(tok != NULL)
+            {
+                if(strcmp(tok,"class") == 0)
+                    name = tok;
+                tok = strtok(NULL," ");
+            }
+        }
     }
 }

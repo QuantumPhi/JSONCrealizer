@@ -1,44 +1,46 @@
  #include <stdio.h>
  #include <string.h>
 
-int main(int argc, char *argv[])
-{
-    int cxflag = 0;
-    int csflag = 0;
-    int jflag = 0;
-
-    char *c;
-    switch(opt(c))
-    {
-        case '-cx':
-            jflag = 1;
-            break;
-        case '-cs':
-            jflag = 1;
-            break;
-        case '-j':
-            jflag = 1;
-            break;
-        default:
-            printhelp();
-            break;
-    }
-}
-
 int opt(char *c)
 {
-    if(!strcmp(*c,"-cx"))
+    if(strcmp(c," ") == 0)
+        return -1;
+    if(strcmp(c,"-cx") == 0)
         return 0;
-    if(!strcmp(*c,"-cs"))
+    if(strcmp(c,"-cs") == 0)
         return 1;
-    if(!strcmp(*c,"-j"))
+    if(strcmp(c,"-j") == 0)
         return 2;
     return -1;
 }
 
 void printhelp()
 {
-    cout << "-cx -> C++" << endl;
-    cout << "-cs -> C#" << endl;
-    cout << "-j -> Java" << endl;
+    puts("-cx -> C++");
+    puts("-cs -> C#");
+    puts("-j -> Java");
+}
+
+int main(int argc, char *argv[])
+{
+    int cxflag = 0;
+    int csflag = 0;
+    int jflag = 0;
+
+    char *c = argc == 2 ? argv[1] : " ";
+    switch(opt(c))
+    {
+        case 0:
+            cxflag = 1;
+            break;
+        case 1:
+            csflag = 1;
+            break;
+        case 2:
+            jflag = 1;
+            break;
+        default:
+            printhelp();
+            break;
+    }
 }

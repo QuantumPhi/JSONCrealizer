@@ -1,25 +1,26 @@
-#include vector.h
-#include memory.h
+#include "vector.h"
+#include "memory.h"
 
 vector init_vector()
 {
     vector v = (vector) malloc(sizeof(vector));
-    v -> data = (void*) malloc(sizeof(void*) * BASE_CAP);
-    v -> length = 0;
-    v -> cap = BASE_CAP;
+    v.data = (void**) malloc(sizeof(void*) * BASE_CAP);
+    v.length = 0;
+    v.capacity = BASE_CAP;
     return v;
 }
 
 void resize()
 {
-    void *temp = (void*)realloc(data, sizeof(data) * EXPAND_RATE);
+    void **temp = (void**)realloc(data, sizeof(data) * EXPAND_RATE);
     if(temp != NULL)
         data = temp;
     else
         puts("Error growing array.");
+    capacity *= EXPAND_RATE;
 }
 
-boolean check_size(int size) { return size +length <= capacity; }
+bool check_size(int size) { return size +length <= capacity; }
 
 void add(void *pdata)
 {
@@ -31,15 +32,15 @@ void add(void *pdata)
 
 void merge(vector v)
 {
-    while(!check_size(sizeof(v->data)))
+    while(!check_size(sizeof(v.data)))
         resize();
-    arraycpy(v->data, 0, data, length, sizeof(v->data));
-    length += sizeof(v->data);
+    arraycpy(v.data, 0, data, length, sizeof(v.data));
+    length += sizeof(v.data);
 }
 
 void remove(int i)
 {
-    void *temp = (void*)malloc(sizeof(data));
+    void **temp = (void**)malloc(sizeof(data));
     arraycpy(data, 0, temp, 0, i);
     arraycpy(data, i, temp, 0, sizeof(data) - i)
     data = temp;
@@ -54,10 +55,10 @@ void set(void *pdata, int i)
 
 void insert(void *pdata, int i)
 {
-    void *temp;
+    void **temp;
     if(!check_size(1))
         resize();
-    temp = (void*)malloc(sizeof(data));
+    temp = (void**)malloc(sizeof(data));
     arraycpy(data, 0, temp, 0, i);
     temp[i] = pdata;
     arraycpy(data, i, temp, i+1, sizeof(data) - i);
@@ -73,5 +74,5 @@ vector subset(int i, int j)
     if(temp == NULL)
         return NULL;
     arraycpy(data, i, temp, 0, (i - j) + 1);
-    v -> merge(temp);
+    v.merge(temp);
 }

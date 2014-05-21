@@ -4,9 +4,9 @@
 #define BASE_CAP 1
 #define EXPAND_RATE 1,5
 
-struct vector
+typedef struct
 {
-    void *data;
+    void **data;
     int length;
     int capacity;
 } vector;
@@ -15,7 +15,7 @@ vector init_vector();
 
 void resize();
 
-boolean check_size(int size);
+bool check_size(int size);
 
 void add(void *pdata);
 

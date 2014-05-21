@@ -1,32 +1,17 @@
  #include <stdio.h>
  #include <string.h>
 
-int type(char *c)
-{
-    char *tok = strtok(c,".");
-    tok = strtok(NULL," ");
-    if(strcmp(tok,"cpp") == 0 || strcmp(tok,"cxx") == 0)
-        return 0;
-    if(strcmp(tok,"cs") == 0)
-        return 1;
-    if(strcmp(tok,"java") == 0)
-        return 2;
-    return -1;
-}
-
 void printhelp()
 {
     puts("Usage:");
     puts("serializer [-options] <FILE>\n");
     puts("Options:");
+    puts("-f <FILENAME>.json -> Print to file");
+    puts("-p -> Print to console");
 }
 
 int main(int argc, char **argv)
 {
-    int cxflag = 0;
-    int csflag = 0;
-    int jflag = 0;
-
     char *c = argc == 2 ? argv[1] : " ";
     switch(type(c))
     {

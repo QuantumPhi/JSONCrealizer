@@ -19,6 +19,8 @@ boolean check_size(int *size);
 
 void add(void *pdata);
 
+void merge(vector v);
+
 void remove(int *i);
 
 void set(void *pdata, int *i);

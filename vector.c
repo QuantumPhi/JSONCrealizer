@@ -21,5 +21,24 @@ boolean check_size(int *size) { return *size +length <= capacity; }
 
 void add(void *pdata)
 {
+    if(!checksize(1))
+        resize;
+    data[length] = pdata;
+    length++;
+}
 
+void merge(vector v)
+{
+    while(!check_size(&sizeof((v->data))))
+        resize();
+    arraycpy(v->data, 0, data, length, sizeof(v->data));
+    length += sizeof(v->data);
+}
+
+void remove(int *i)
+{
+    void **temp = malloc(sizeof(data));
+    arraycpy(data, 0, temp, 0, *i);
+    arraycpy(data, *i, temp, 0, sizeof(data) - *i)
+    data = temp;
 }

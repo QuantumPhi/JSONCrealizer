@@ -21,13 +21,13 @@ void printhelp()
     puts("Options:");
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
     int cxflag = 0;
     int csflag = 0;
     int jflag = 0;
 
-    char *c = argc == 3 ? argv[1] : " ";
+    char *c = argc == 2 ? argv[1] : " ";
     switch(type(c))
     {
         case 0:
@@ -47,7 +47,8 @@ int main(int argc, char *argv[])
     FILE *fp;
     char *line;
     char *name;
-    char[] *param = malloc();
+    char[] *param;
+    bool marker = false;
     if(strcmp(c," ") != 0)
     {
         fp = fopen(c,"r");
@@ -56,8 +57,13 @@ int main(int argc, char *argv[])
             char *tok = strtok(line," ");
             while(tok != NULL)
             {
-                if(strcmp(tok,"class") == 0)
+                if(marker)
+                {
+                    marker = false;
                     name = tok;
+                }
+                if(strcmp(tok,"class") == 0)
+                    marker = true;
                 tok = strtok(NULL," ");
             }
         }

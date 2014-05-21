@@ -4,7 +4,7 @@
 vector init_vector()
 {
     vector v = (vector) malloc(sizeof(vector));
-    v -> data = (void**) malloc(sizeof(void*) * BASE_CAP);
+    v -> data = (void*) malloc(sizeof(void*) * BASE_CAP);
     v -> length = 0;
     v -> cap = BASE_CAP;
     return v;
@@ -12,7 +12,7 @@ vector init_vector()
 
 void resize()
 {
-    void *temp = realloc(data, sizeof(data) * EXPAND_RATE);
+    void *temp = (void*)realloc(data, sizeof(data) * EXPAND_RATE);
     if(temp != NULL)
         data = temp;
     else

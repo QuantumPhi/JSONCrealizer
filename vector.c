@@ -31,7 +31,7 @@ void add(void *pdata)
 
 void merge(vector v)
 {
-    while(!check_size(&sizeof((v->data))))
+    while(!check_size(sizeof(v->data)))
         resize();
     arraycpy(v->data, 0, data, length, sizeof(v->data));
     length += sizeof(v->data);
@@ -39,8 +39,39 @@ void merge(vector v)
 
 void remove(int i)
 {
-    void **temp = malloc(sizeof(data));
+    void *temp = (void*)malloc(sizeof(data));
     arraycpy(data, 0, temp, 0, i);
     arraycpy(data, i, temp, 0, sizeof(data) - i)
     data = temp;
+}
+
+void set(void *pdata, int i)
+{
+    if(i < 0 || i > length)
+        return;
+    data[i] = pdata;
+}
+
+void insert(void *pdata, int i)
+{
+    void *temp;
+    if(!check_size(1))
+        resize();
+    temp = (void*)malloc(sizeof(data));
+    arraycpy(data, 0, temp, 0, i);
+    temp[i] = pdata;
+    arraycpy(data, i, temp, i+1, sizeof(data) - i);
+    data = temp;
+}
+
+vector subset(int i, int j)
+{
+    if((i < 0 || j < 0) || (i > length || j > length))
+        return NULL;
+    vector v = init_vector();
+    void *temp = malloc((i - j) + 5);
+    if(temp == NULL)
+        return NULL;
+    arraycpy(data, i, temp, 0, (i - j) + 1);
+    v -> merge(temp);
 }

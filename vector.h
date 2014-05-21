@@ -2,7 +2,7 @@
 #define VECTOR_H
 
 #define BASE_CAP 1
-#define EXPAND_RATE 2
+#define EXPAND_RATE 1,5
 
 struct vector
 {
@@ -27,6 +27,6 @@ void set(void *pdata, int i);
 
 void insert(void *pdata, int i);
 
-void subset(int i, int j);
+vector subset(int i, int j);
 
 #endif

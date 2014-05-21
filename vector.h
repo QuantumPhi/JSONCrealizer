@@ -6,27 +6,27 @@
 
 struct vector
 {
-    void **data;
-    int *length;
-    int*cap;
+    void *data;
+    int length;
+    int capacity;
 } vector;
 
 vector init_vector();
 
 void resize();
 
-boolean check_size(int *size);
+boolean check_size(int size);
 
 void add(void *pdata);
 
 void merge(vector v);
 
-void remove(int *i);
+void remove(int i);
 
-void set(void *pdata, int *i);
+void set(void *pdata, int i);
 
-void insert(void *pdata, int *i);
+void insert(void *pdata, int i);
 
-void subset(int *i, int *j);
+void subset(int i, int j);
 
 #endif

@@ -12,12 +12,14 @@ vector init_vector()
 
 void resize()
 {
-    void **temp = malloc(sizeof(data) * EXPAND_RATE);
-    arraycpy(data,0, temp, 0, sizeof(data));
-    data = temp;
+    void *temp = realloc(data, sizeof(data) * EXPAND_RATE);
+    if(temp != NULL)
+        data = temp;
+    else
+        puts("Error growing array.");
 }
 
-boolean check_size(int *size) { return *size +length <= capacity; }
+boolean check_size(int size) { return size +length <= capacity; }
 
 void add(void *pdata)
 {
@@ -35,10 +37,10 @@ void merge(vector v)
     length += sizeof(v->data);
 }
 
-void remove(int *i)
+void remove(int i)
 {
     void **temp = malloc(sizeof(data));
-    arraycpy(data, 0, temp, 0, *i);
-    arraycpy(data, *i, temp, 0, sizeof(data) - *i)
+    arraycpy(data, 0, temp, 0, i);
+    arraycpy(data, i, temp, 0, sizeof(data) - i)
     data = temp;
 }

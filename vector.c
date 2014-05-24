@@ -6,7 +6,6 @@ vector init_vector()
     vector v = (vector) malloc(sizeof(vector));
     v.data = (void**) malloc(sizeof(void*) * BASE_CAP);
     v.length = 0;
-    v.capacity = BASE_CAP;
     return v;
 }
 

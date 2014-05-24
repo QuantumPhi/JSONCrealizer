@@ -8,7 +8,6 @@ typedef struct
 {
     void **data;
     int length;
-    int capacity;
 } vector;
 
 vector init_vector();
